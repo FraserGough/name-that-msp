@@ -1,0 +1,88 @@
+body {
+  background-color:blue;
+}
+#card {
+  background-color:white;
+  margin-left: auto;
+  margin-right: auto;
+  width:70%;
+  padding-top:4%;
+  padding-bottom:4%;
+  padding-left:3%;
+}
+#picFrame {
+  width:60%;
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top:1%;
+  padding-bottom:1%;
+}
+img {
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+  width:80%;
+}
+#mspDetails {
+  margin-left:20%;
+  font-family: 'Baloo Tammudu 2', cursive;
+  font-size:1.5em
+}
+.answer {
+  font-size:1em;
+  margin-left:8%;
+  margin-top: 0.5em;
+  margin-bottom:0.5em;
+}
+button {
+  margin-left:auto;
+  margin-right:auto;
+  display:block;
+}
+/* load spinner - thanks to loading.io/css */
+.lds-ring {
+  display: inline-block;
+  position: relative;
+/*  width: 80px;
+  height: 80px;  */
+  width: 6em;
+  height: 6em;
+  margin-left:auto;
+  margin-right:auto;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+/*  width: 64px;
+  height: 64px;
+  margin: 8px; */
+  width:4em;
+  height:4em;
+/*  margin-left:75%;
+  margin-right:auto; */
+  margin-left:auto;
+  margin-right:auto;
+  border: 8px solid #cef;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #cef transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
