@@ -19,13 +19,13 @@
     <img id="cardPic" src="" onload="showPicture()">
   </div> 
   <div id="mspDetails">
-    <div id="mspName"><details><summary>name</summary><p class="answer" id="mspNameText"></p></div>
-    <div id="mspSeat"><details><summary>constituency / region</summary><p class="answer" id="mspSeatText"></p></div>
-    <div id="mspParty"><details><summary>party</summary><p class="answer" id="mspPartyText"></p></div>
+    <div class="qA" id="mspName"><details><summary>name</summary><p class="answer" id="mspNameText"></p></div>
+    <div class="qA" id="mspSeat"><details><summary>constituency / region</summary><p class="answer" id="mspSeatText"></p></div>
+    <div class="qA" id="mspParty"><details><summary>party</summary><p class="answer" id="mspPartyText"></p></div>
   </div>
 </div>
 <div id="currentCardNum"></div>
-<button type="button" onclick="turnCard('forward')">&#8594;</button>
+<button type="button" title="Next MSP" onclick="turnCard('forward')">&#8594;</button>
 <script>getKeyData()</script>
 </body>
 </html>

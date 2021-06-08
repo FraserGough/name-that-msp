@@ -1,8 +1,9 @@
 body {
-  background-color:blue;
+  background-color:#f3dbff;
 }
 #card {
   background-color:white;
+  box-shadow: 10px 10px 5px grey;
   margin-left: auto;
   margin-right: auto;
   width:70%;
@@ -11,7 +12,7 @@ body {
   padding-left:3%;
 }
 #picFrame {
-  width:60%;
+  width:95%;
   display:block;
   margin-left: auto;
   margin-right: auto;
@@ -22,12 +23,13 @@ img {
   display:block;
   margin-left: auto;
   margin-right: auto;
-  width:80%;
+  width:90%;
 }
 #mspDetails {
-  margin-left:20%;
+  margin-left:5%;
+  margin-right:5%;
   font-family: 'Baloo Tammudu 2', cursive;
-  font-size:1.5em
+  font-size:1.2em
 }
 .answer {
   font-size:1em;
@@ -39,6 +41,10 @@ button {
   margin-left:auto;
   margin-right:auto;
   display:block;
+  font-size:2em;
+}
+.qA {
+  border-bottom:solid 1px #f3dbff;
 }
 /* load spinner - thanks to loading.io/css */
 .lds-ring {
