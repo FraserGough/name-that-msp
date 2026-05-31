@@ -1,94 +1,89 @@
 body {
-  background-color:#f3dbff;
+  width:100%;
 }
-#card {
-  background-color:white;
-  box-shadow: 10px 10px 5px grey;
-  margin-left: auto;
-  margin-right: auto;
-  width:70%;
-  padding-top:4%;
-  padding-bottom:4%;
-  padding-left:3%;
+
+#core {
+  width:100%;
+  margin: 0 auto;
+  justify-content:center;
+  flex-flow:row wrap;
+  gap:8px;
+  min-height:400px;
+  position:fixed;
+  top:30%;
 }
-#picFrame {
-  width:95%;
-  display:block;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top:1%;
-  padding-bottom:1%;
+
+#deck {
+  flex-grow:7;
+  max-width:400px;
+  position:relative;
+  transform:scale(0.9);
 }
-img {
-  display:block;
-  margin-left: auto;
-  margin-right: auto;
-  width:90%;
+
+.mspCard {
+  min-width:200px;
+  max-width:300px;
+  min-height:400px;
+  position:absolute;
+  aspect-ratio:1/1.2;
+  cursor:default;
 }
-#mspDetails {
-  margin-left:5%;
-  margin-right:5%;
-  font-family: 'Baloo Tammudu 2', cursive;
-  font-size:1.2em
+
+#answering {
+  z-index:400;
+  flex-flow:column wrap;
+  justify-content:center;
+  align-items:center;
+  max-width:100px;
+  gap:20px;
+  opacity:0.6;
 }
-.answer {
-  font-size:1em;
-  margin-left:8%;
-  margin-top: 0.5em;
-  margin-bottom:0.5em;
+
+.topCard {
+  transform:scale(1.1) rotate(0deg);
+  left:20%;
 }
-button {
-  margin-left:auto;
-  margin-right:auto;
-  display:block;
-  font-size:2em;
+
+.bouncing {
+  animation-duration:0.5s;
+  animation-name:bounce;
+  animation-iteration-count:infinite;
+  animation-direction:alternate;
+  animation-timing-function:cubic-bezier(1,.5,.5.,1);
 }
-.qA {
-  border-bottom:solid 1px #f3dbff;
+
+.headerButton:hover {
+  transform:scale(1.1);
 }
-/* load spinner - thanks to loading.io/css */
-.lds-ring {
-  display: inline-block;
-  position: relative;
-/*  width: 80px;
-  height: 80px;  */
-  width: 6em;
-  height: 6em;
-  margin-left:auto;
-  margin-right:auto;
-}
-.lds-ring div {
-  box-sizing: border-box;
-  display: block;
-  position: absolute;
-/*  width: 64px;
-  height: 64px;
-  margin: 8px; */
-  width:4em;
-  height:4em;
-/*  margin-left:75%;
-  margin-right:auto; */
-  margin-left:auto;
-  margin-right:auto;
-  border: 8px solid #cef;
-  border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #cef transparent transparent transparent;
-}
-.lds-ring div:nth-child(1) {
-  animation-delay: -0.45s;
-}
-.lds-ring div:nth-child(2) {
-  animation-delay: -0.3s;
-}
-.lds-ring div:nth-child(3) {
-  animation-delay: -0.15s;
-}
-@keyframes lds-ring {
+
+@keyframes bounce {
   0% {
-    transform: rotate(0deg);
+    transform:translateY(0px);
   }
   100% {
-    transform: rotate(360deg);
+    transform:translateY(-10px);
   }
 }
+
+@media (max-width: 640px) {
+  #core {
+    width:100%;
+    flex-flow:column wrap;
+    min-height:500px;
+    align-items:center;
+    overflow:clip;
+    top:20%;
+  }
+  #deck {
+    width:100%;
+    transform:scale(0.8);
+  }
+  #answering {
+    min-width:100%;
+    flex-flow:row wrap;
+    align-items:space-around;
+    position:fixed;
+    bottom:0;
+  }
+}
+
