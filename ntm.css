@@ -1,0 +1,89 @@
+body {
+  width:100%;
+}
+
+#core {
+  width:100%;
+  margin: 0 auto;
+  justify-content:center;
+  flex-flow:row wrap;
+  gap:8px;
+  min-height:400px;
+  position:fixed;
+  top:30%;
+}
+
+#deck {
+  flex-grow:7;
+  max-width:400px;
+  position:relative;
+  transform:scale(0.9);
+}
+
+.mspCard {
+  min-width:200px;
+  max-width:300px;
+  min-height:400px;
+  position:absolute;
+  aspect-ratio:1/1.2;
+  cursor:default;
+}
+
+#answering {
+  z-index:400;
+  flex-flow:column wrap;
+  justify-content:center;
+  align-items:center;
+  max-width:100px;
+  gap:20px;
+  opacity:0.6;
+}
+
+.topCard {
+  transform:scale(1.1) rotate(0deg);
+  left:20%;
+}
+
+.bouncing {
+  animation-duration:0.5s;
+  animation-name:bounce;
+  animation-iteration-count:infinite;
+  animation-direction:alternate;
+  animation-timing-function:cubic-bezier(1,.5,.5.,1);
+}
+
+.headerButton:hover {
+  transform:scale(1.1);
+}
+
+@keyframes bounce {
+  0% {
+    transform:translateY(0px);
+  }
+  100% {
+    transform:translateY(-10px);
+  }
+}
+
+@media (max-width: 640px) {
+  #core {
+    width:100%;
+    flex-flow:column wrap;
+    min-height:500px;
+    align-items:center;
+    overflow:clip;
+    top:20%;
+  }
+  #deck {
+    width:100%;
+    transform:scale(0.8);
+  }
+  #answering {
+    min-width:100%;
+    flex-flow:row wrap;
+    align-items:space-around;
+    position:fixed;
+    bottom:0;
+  }
+}
+
