@@ -1,0 +1,18 @@
+{
+	"short_name": "Name that MSP",
+	"name": "Name that MSP: a flashcard game",
+	"icons": [
+		{
+			"src": "/favicon-192.png",
+			"type":"image/png",
+			"sizes":"192x192"
+		},
+		{
+			"src": "/favicon-512.png",
+			"type":"image/png",
+			"sizes":"512x512"
+		}
+	],
+	"start_url":"/",
+	"display":"browser"
+}
