@@ -47,29 +47,33 @@ function revealDetails(container) {
 }
 
 function panelButton(button) {
-  const isToggled = (button.classList.contains("bouncing")) ? true: false; 
-  const targetPanel = document.getElementById(button.dataset.target);
-  if (isToggled) {
-    targetPanel.classList.add("w3-hide");
-    button.classList.remove("bouncing");
-    const restoreElem = document.querySelector(".toBeRestored")
-    restoreElem.classList.remove("w3-hide","toBeRestored");
-  } else {
-    const panels = document.querySelectorAll(".msgPanel");
-    panels.forEach((panel) => {
-      panel.classList.add("w3-hide");
-    });
-    targetPanel.classList.remove("w3-hide");
-    const core = document.getElementById("core");
-    const tempHideId = (core.classList.contains("w3-hide")) ? "loadScreen" : "core";
-    const tempHideObj = document.getElementById(tempHideId);
-    tempHideObj.classList.add("w3-hide","toBeRestored");
-    const headerBtns = document.getElementById("header").querySelectorAll("button");
-    headerBtns.forEach((headerButton) => {
-      headerButton.classList.remove("bouncing");
-    });
+  const alreadyToggled = (button.classList.contains("bouncing")) ? true: false;
+  const headerBtns = document.getElementById("header").querySelectorAll("button");
+  headerBtns.forEach((headerButton) => {
+    headerButton.classList.remove("bouncing");
+  });
+  const panels = document.querySelectorAll(".msgPanel");
+  panels.forEach((panel) => {
+    panel.classList.add("w3-hide");
+  });
+  const loadScreen = document.getElementById("loadScreen");
+  const core = document.getElementById("core");
+  if (!alreadyToggled) {
     button.classList.add("bouncing");
-  };
+    const targetPanel = document.getElementById(button.dataset.target);
+    targetPanel.classList.remove("w3-hide");
+    if (loadScreen) {
+      loadScreen.classList.add("w3-hide");
+    } else {
+      core.classList.add("w3-hide");
+    };
+  } else {
+    if (loadScreen) {
+      loadScreen.classList.remove("w3-hide");
+    } else {
+      core.classList.remove("w3-hide");
+    };
+ };
 }
 
 function rightAnswer() {
@@ -284,6 +288,8 @@ async function buildCard(mspIndexNum) {
     warnMissingPhoto(mspObject.displayName);
   };
   photo.classList.add("w3-image");
+  photo.loading = "lazy";
+  photo.onerror = `this.src='photoFallback.webp'`;
   photo.style.width = "95%";
   photo.style.maxHeight = "210px";
   photo.alt = "a photo of an MSP";
@@ -330,8 +336,20 @@ function warnMissingPhoto(msp) {
   warnPanel.appendChild(warnPara);
 }
 
-async function safePhotoSetting(element,src) {
-  const fallbackSrc = "photoFallback.webp"
+function getOptimisedPath(url) {
+  const urlArray = url.split("/");
+  let fName = urlArray[urlArray.length - 1];
+  fName = fName.replaceAll("%20","-");
+  fName = fName.replaceAll("%27","-");
+  fName = fName.replaceAll("--","-");
+  if (!fName.includes(".jpg")) {
+    fName += ".jpg";
+  };
+  let path = `/optimisedPhotos/JPEG/${fName}`;
+  return path;
+}
+
+async function checkImgExists(url) {
   const ok = await new Promise((resolve) => {
     const probe = new Image();
     probe.onload = () => {
@@ -342,9 +360,21 @@ async function safePhotoSetting(element,src) {
       };
     };
     probe.onerror = () => resolve(false);
-    probe.src = src;
+    probe.src = url;
   });
-  element.src = ok ? src : fallbackSrc;
+  return ok ? true : false;
+}
+
+async function safePhotoSetting(element,src) {
+  const optimisedPath = getOptimisedPath(src);
+  if (checkImgExists(optimisedPath)) {
+    src = optimisedPath;
+  } else {
+    if (!checkImgExists(src)) {
+      src = "photoFallback.webp";
+    }
+  };
+  element.src = src;
 }
 
 function setTopCard() {
