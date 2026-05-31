@@ -345,7 +345,7 @@ function getOptimisedPath(url) {
   if (!fName.includes(".jpg")) {
     fName += ".jpg";
   };
-  let path = `optimisedPhotos/JPEG/${fName}`;
+  let path = `./optimisedPhotos/JPEG/${fName}`;
   return path;
 }
 
