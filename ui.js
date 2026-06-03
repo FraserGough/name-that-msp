@@ -190,7 +190,8 @@ function progressUpdateImgRender() {
 async function monitorImgRendering() {
   progressUpdateImgRender();
   const core = document.getElementById("core");
-  const images = Array.from(core.querySelectorAll("img"));
+  const deck = document.getElementById("deck");
+  const images = Array.from(deck.querySelectorAll("img"));
   const resolve = () => {
     console.log("resolve called");
   };
