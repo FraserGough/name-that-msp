@@ -1,6 +1,14 @@
 import {getNumMsps} from "./data.js";
 import {getMspObject} from "./data.js";
 
+let optimisedPhotoMap;
+
+async function loadOptimisedPhotoMap() {
+  const response = await fetch('./optimisedPhotoMap.json');
+  const data = await response.json();
+  optimisedPhotoMap = data;
+}
+
 function attachEventHandlers() {
   const headerDiv = document.getElementById("header");
   headerDiv.addEventListener("click", (e) => {
@@ -283,7 +291,12 @@ async function buildCard(mspIndexNum) {
   imgContainer.classList.add("w3-container","w3-margin-top");
   imgContainer.style.maxWidth = "400px"; 
   const photo = document.createElement("img");
-  await safePhotoSetting(photo,mspObject.PhotoURL);
+  const optimisedPhotoItem = optimisedPhotoMap.find(member => member.id === mspObject.PersonID);
+  if (optimisedPhotoItem) {
+    photo.src = optimisedPhotoItem.url;
+  } else {
+    await safePhotoSetting(photo,mspObject.PhotoURL);
+  };
   if (photo.src.includes("photoFallback")) {
     warnMissingPhoto(mspObject.displayName);
   };
@@ -366,13 +379,9 @@ async function checkImgExists(url) {
 }
 
 async function safePhotoSetting(element,src) {
-  const optimisedPath = getOptimisedPath(src);
-  if (checkImgExists(optimisedPath)) {
-    src = optimisedPath;
-  } else {
-    if (!checkImgExists(src)) {
-      src = "photoFallback.webp";
-    }
+  const imgOk = await checkImgExists(src);
+  if (imgOk === false) {
+    src = "photoFallback.webp";
   };
   element.src = src;
 }
@@ -388,4 +397,5 @@ function setTopCard() {
   };
 }
 
+loadOptimisedPhotoMap();
 attachEventHandlers();
